@@ -1,33 +1,26 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.task {
-  font-weight: bold;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 
-.task-is-done {
-  font-weight: normal;
-  text-decoration: line-through;
-}
+/*.error {*/
+/*  border: red 1px solid;*/
+/*}*/
 
-.btn-filter-active {
-  background-color: coral;
-  color: white;
-  border: 4px solid gainsboro;
-  border-radius: 4px;
-}
+/*.error-message {*/
+/*  color: red;*/
+/*}*/
 
-.bnt-filter{
+/*.active-filter {*/
+/*  background-color: aquamarine;*/
+/*}*/
 
-}
+/*.is-done {*/
+/*  opacity: 0.5;*/
+/*}*/
 
-.input-error {
-  border: 2px solid darkred;
-  outline: none;
-}
