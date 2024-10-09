@@ -13,16 +13,17 @@ type AddTodolistActionType = {
         title: string
     }
 }
-type AddTodolistActionType = {
-    type: 'CHANGE_TODOLIST',
+type ChangeTodolistActionType = {
+    type: 'CHANGE_TODOLIST_TITLE',
     payload: {
+        id: string
         title: string
     }
 }
 
 
 
-type ActionType = RemoveTodolistActionType | AddTodolistActionType
+type ActionType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistActionType
 
 const todolistID1 = v1();
 const todolistID2 = v1();
@@ -43,7 +44,7 @@ export const todolistReducer = (state: TodoListsType[] = initialState, action: A
             const newState = [...state, newTodo]
             return newState
         }
-        case 'CHANGE_TODOLIST': {
+        case 'CHANGE_TODOLIST_TITLE': {
 
         }
 
