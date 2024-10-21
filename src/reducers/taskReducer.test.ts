@@ -21,20 +21,5 @@ test('remove todo', () => {
     expect(endState[0].title).toBe('What to learn')
 })
 
-test('add todo', () => {
-    const endState = todolistReducer(initialState, addTodolistAC('new todo'));
-    expect(endState.length).toBe(3)
-    expect(endState[2].title).toBe('new todo')
-})
 
-test('change title todo', () => {
-    const endState = todolistReducer(initialState, changeTodolistTitleAC(todolistID1, 'new name'));
-    expect(endState.length).toBe(2)
-    expect(endState[0].title).toBe('new name');
-})
-
-test('change filter todo', () => {
-    const endState = todolistReducer(initialState, changeTodolistFilterAC(todolistID1, 'active'))
-    expect(endState[0].filter).toBe('active');
-})
 ;

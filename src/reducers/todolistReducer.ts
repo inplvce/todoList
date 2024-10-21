@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {TodoListsType} from "../App";
+import {FilterValuesType, TodoListsType} from "../App";
+
 
 type RemoveTodolistActionType = {
     type: 'REMOVE_TODOLIST',
@@ -13,7 +14,7 @@ type AddTodolistActionType = {
         title: string
     }
 }
-type ChangeTodolistActionType = {
+type ChangeTodolistTitleActionType = {
     type: 'CHANGE_TODOLIST_TITLE',
     payload: {
         id: string
@@ -21,9 +22,16 @@ type ChangeTodolistActionType = {
     }
 }
 
+type ChangeTodolistFilterActionType = {
+    type: 'CHANGE_TODOLIST_FILTER',
+    payload: {
+        id: string
+        filter: FilterValuesType
+    }
+}
 
 
-type ActionType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistActionType
+type ActionType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistTitleActionType | ChangeTodolistFilterActionType
 
 const todolistID1 = v1();
 const todolistID2 = v1();
@@ -45,7 +53,10 @@ export const todolistReducer = (state: TodoListsType[] = initialState, action: A
             return newState
         }
         case 'CHANGE_TODOLIST_TITLE': {
-
+            return [...state.map((tl) => tl.id === action.payload.id ? {...tl, title: action.payload.title} : tl)]
+        }
+        case 'CHANGE_TODOLIST_FILTER': {
+            return [...state.map((tl) => tl.id === action.payload.id ? {...tl, filter: action.payload.filter} : tl)]
         }
 
         default:
@@ -58,7 +69,7 @@ export const removeTodolistAC = (id: string): RemoveTodolistActionType => {
         type: 'REMOVE_TODOLIST',
         payload: {
             id: id,
-        }
+        },
     };
 }
 
@@ -70,3 +81,24 @@ export const addTodolistAC = (title: string): AddTodolistActionType => {
         }
     }
 }
+
+export const changeTodolistTitleAC = (id: string, title: string): ChangeTodolistTitleActionType => {
+    return {
+        type: "CHANGE_TODOLIST_TITLE",
+        payload: {
+            id: id,
+            title: title
+        }
+    }
+}
+
+export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): ChangeTodolistFilterActionType => {
+    return {
+        type: "CHANGE_TODOLIST_FILTER",
+        payload: {
+            id: id,
+            filter: filter
+        }
+    }
+}
+

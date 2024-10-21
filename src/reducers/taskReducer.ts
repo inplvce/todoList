@@ -3,16 +3,22 @@ import {TaskType} from "../Todolist";
 export const taskReducer = (state: TaskType[], action: TaskReducer): TaskType[] => {
     switch (action.type) {
         case "REMOVE-TASK": {
-            return state
+         const stateCopy = state
+
         }
+        // case "ADD_TASK": {
+        //     return state
+        // }
+
         default:
             return state
     }
 }
 
-type TaskReducer = RemoveTaskACType
+type TaskReducer = RemoveTaskACType | AddTaskACType
 
 type RemoveTaskACType = ReturnType<typeof removeTaskAC>
+type AddTaskACType = ReturnType<typeof addTaskAC>
 
 export const removeTaskAC = (id: string) => {
     return {
@@ -20,3 +26,12 @@ export const removeTaskAC = (id: string) => {
         payload: {id}
     } as const
 }
+
+export const addTaskAC = (id: string, title: string) => {
+    return {
+        type: 'ADD-TASK',
+        payload: {id, title}
+    } as const
+}
+
+
