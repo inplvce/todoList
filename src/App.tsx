@@ -34,18 +34,14 @@ function App() {
 
     const [tasks, setTasks] = useState<TaskStateType>({
         [todolistID1]: [
-            {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false},
-            {id: v1(), title: "Rest API", isDone: false},
-            {id: v1(), title: "GraphQL", isDone: false},
+            { id: v1(), title: 'CSS', isDone: false },
+            { id: v1(), title: 'JS', isDone: true },
+            { id: v1(), title: 'React', isDone: false },
         ],
         [todolistID2]: [
-            {id: v1(), title: "Milk", isDone: true},
-            {id: v1(), title: "Meat", isDone: true},
-            {id: v1(), title: "Beer", isDone: false},
-            {id: v1(), title: "Eggs", isDone: false},
-            {id: v1(), title: "Apples", isDone: false},
+            { id: v1(), title: 'bread', isDone: false },
+            { id: v1(), title: 'milk', isDone: true },
+            { id: v1(), title: 'tea', isDone: false },
         ]
     });
 
