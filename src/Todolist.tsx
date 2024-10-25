@@ -17,7 +17,7 @@ export type TaskType = {
 
 
 
-type PropsType = {
+export type PropsType = {
     todolistID: string
     title: string
     tasks: Array<TaskType>
