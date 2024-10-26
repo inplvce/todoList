@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {TodoListsType} from "../App";
+import {TodolistsType} from "../App";
 import {
     addTodolistAC, changeTodolistFilterAC,
     changeTodolistTitleAC,
@@ -10,7 +10,7 @@ import {
 const todolistID1 = v1();
 const todolistID2 = v1();
 
-const initialState: TodoListsType[] = [
+const initialState: TodolistsType[] = [
     {id: todolistID1, title: 'What to learn', filter: 'all'},
     {id: todolistID2, title: 'What to buy', filter: 'all'},
 ]

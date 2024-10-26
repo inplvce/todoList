@@ -18,14 +18,14 @@ import {Menu, Swipe} from "@mui/icons-material";
 import {pink} from "@mui/material/colors";
 
 export type FilterValuesType = "all" | "active" | "completed";
-export type TodoListsType = { id: string, title: string, filter: FilterValuesType }
+export type TodolistsType = { id: string, title: string, filter: FilterValuesType }
 export type TaskStateType = { [key: string]: Array<TaskType> }
 
 function App() {
     const todolistID1 = v1();
     const todolistID2 = v1();
 
-    const [todolists, setTodoLists] = useState<Array<TodoListsType>>([
+    const [todolists, setTodoLists] = useState<Array<TodolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -66,7 +66,7 @@ function App() {
     // CRUD todoLists
     function addTodoList(title: string) {
         const newTodoListID = v1()
-        const newTodoList: TodoListsType = {id: newTodoListID, title, filter: "all"}
+        const newTodoList: TodolistsType = {id: newTodoListID, title, filter: "all"}
         setTodoLists([newTodoList, ...todolists])
         setTasks({...tasks, [newTodoListID]: []})
     }
