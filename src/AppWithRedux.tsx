@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import {Menu, Swipe} from "@mui/icons-material";
 import {pink} from "@mui/material/colors";
+import {todolistReducer} from "./reducers/todolistReducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistsType = { id: string, title: string, filter: FilterValuesType }
@@ -25,7 +26,7 @@ function App() {
     const todolistID1 = v1();
     const todolistID2 = v1();
 
-    const [todolists, setTodoLists] = useState<Array<TodolistsType>>([
+    const [todolists, dispatch] = useReducer(todolistReducer, [
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
