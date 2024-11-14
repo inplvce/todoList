@@ -30,6 +30,10 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
+    const [users, setUsers] = useState([
+        {title: 'Max'}, {title: 'Damien'}
+    ])
+
     const [darkMode, setDarkMode]=useState(false)
 
     const [tasks, setTasks] = useState<TaskStateType>({
@@ -98,51 +102,68 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-        <div className="App">
-            <AppBar position ='static'>
-                <Toolbar>
-                    <IconButton edge={'start'} color={'inherit'} aria-label={'menu'}>
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant={'h6'}>
-                    </Typography>
-                    <Switch
-                       color={"primary"}
-                       onChange={(e)=> setDarkMode(e.currentTarget.checked)}
-                    />
-                </Toolbar>
-            </AppBar>
-            <Container fixed>
-                <Grid container style={{padding: '20px'}}>
-            <AddItemForm addItem={addTodoList}/>
-                </Grid>
-                <Grid container spacing = {3}>
-            {todolists.map(el => {
-                return <Grid item>
-                    <Paper style={{padding: '10px'}}>
-                    <Todolist
-                        key={el.id}
-                        todolistID={el.id}
-                        title={el.title}
-                        tasks={tasks[el.id]}
-                        removeTask={removeTask}
-                        changeTodoListFilter={changeTodoListFilter}
-                        addTask={addTask}
-                        changeTaskStatus={changeTaskStatus}
-                        filter={el.filter}
-                        removeTodoList={removeTodoList}
-                        changeTaskTitle={changeTaskTitle}
-                        changeTodoListTitle={changeTodoListTitle}
-                    />
-                </Paper>
-                </Grid>
-            })}
-                </Grid>
+            <div className="App">
+                <AppBar position='static'>
+                    <Toolbar>
+                        <IconButton edge={'start'} color={'inherit'} aria-label={'menu'}>
+                            <Menu/>
+                        </IconButton>
+                        <Typography variant={'h6'}>
+                        </Typography>
+                        <Switch
+                            color={"primary"}
+                            onChange={(e) => setDarkMode(e.currentTarget.checked)}
+                        />
+                    </Toolbar>
+                </AppBar>
+                <Container fixed>
+                    <Grid container style={{padding: '20px'}}>
+                        <AddItemForm addItem={addTodoList}/>
+                    </Grid>
+                    <Grid container spacing={3}>
+                        {todolists.map(el => {
+
+                            return <Grid item>
+                                <Paper style={{padding: '10px'}}>
+                                    <Todolist
+                                        key={el.id}
+                                        todolistID={el.id}
+                                        title={el.title}
+                                        tasks={tasks[el.id]}
+                                        removeTask={removeTask}
+                                        changeTodoListFilter={changeTodoListFilter}
+                                        addTask={addTask}
+                                        changeTaskStatus={changeTaskStatus}
+                                        filter={el.filter}
+                                        removeTodoList={removeTodoList}
+                                        changeTaskTitle={changeTaskTitle}
+                                        changeTodoListTitle={changeTodoListTitle}
+                                    />
+                                </Paper>
+                            </Grid>
+                        })}
+                    </Grid>
 
                 </Container>
+            </div>
 
-        </div>
+            //=======
+            <div>
+                <div>
+                    <input placeholder={'search'}/>
+                    <button>find</button>
+                </div>
+                <ul>
+                    {users.map((u => <li>{u.title}</li>))}
+                </ul>
+                <div>
+                    <h2>UserName</h2>
+                    <div>Details</div>
+                </div>
+            </div>
+            //======
         </ThemeProvider>
+
     );
 }
 
