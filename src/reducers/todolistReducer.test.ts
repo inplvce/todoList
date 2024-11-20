@@ -37,4 +37,3 @@ test('change filter todo', () => {
     const endState = todolistReducer(initialState, changeTodolistFilterAC(todolistID1, 'active'))
     expect(endState[0].filter).toBe('active');
 })
-;

@@ -30,10 +30,6 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    const [users, setUsers] = useState([
-        {title: 'Max'}, {title: 'Damien'}
-    ])
-
     const [darkMode, setDarkMode]=useState(false)
 
     const [tasks, setTasks] = useState<TaskStateType>({
@@ -146,22 +142,6 @@ function App() {
 
                 </Container>
             </div>
-
-            //=======
-            <div>
-                <div>
-                    <input placeholder={'search'}/>
-                    <button>find</button>
-                </div>
-                <ul>
-                    {users.map((u => <li>{u.title}</li>))}
-                </ul>
-                <div>
-                    <h2>UserName</h2>
-                    <div>Details</div>
-                </div>
-            </div>
-            //======
         </ThemeProvider>
 
     );
