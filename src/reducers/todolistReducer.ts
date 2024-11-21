@@ -52,7 +52,7 @@ export const removeTodolistAC = (todolistId: string) => ({
 
 export const addTodolistAC = (title: string) => ({
     type: "ADD_TODOLIST",
-    payload: { title, todolistId: v1() }
+    payload: { todolistId: v1(), title}
 } as const);
 
 export const changeTodolistTitleAC = (id: string, title: string) => ({
