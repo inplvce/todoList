@@ -1,5 +1,5 @@
-import {taskReducer} from "./taskReducer";
-import {addTodolistAC, removeTodolistAC, todolistReducer} from "./todolistReducer";
+import {tasksReducer} from "./tasksReducer";
+import {addTodolistAC, removeTodolistAC, todolistsReducer} from "./todolistsReducer";
 import {TaskStateType, TodolistsType} from "../App";
 import {PropsType} from "../Todolist";
 
@@ -17,7 +17,7 @@ test('new array should be added when new todolist is added', () => {
         ],
     }
 
-    const endState = taskReducer(startState, addTodolistAC('new todolist'))
+    const endState = tasksReducer(startState, addTodolistAC('new todolist'))
 
     const keys = Object.keys(endState)
     const newKey = keys.find(k => k !== 'todolistId1' && k !== 'todolistId2')
@@ -35,8 +35,8 @@ test('ids should be equals', () => {
 
     const action = addTodolistAC('new todolist')
 
-    const endTasksState = taskReducer(startTasksState, action)
-    const endTodolistsState = todolistReducer(startTodolistsState, action)
+    const endTasksState = tasksReducer(startTasksState, action)
+    const endTodolistsState = todolistsReducer(startTodolistsState, action)
 
     const keys = Object.keys(endTasksState)
     const idFromTasks = keys[0]

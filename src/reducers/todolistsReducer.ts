@@ -13,16 +13,14 @@ type ActionType =
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType;
 
-const todolistID1 = v1();
-const todolistID2 = v1();
+export let todolistID1 = v1();
+export let todolistID2 = v1();
 
-const initialState: TodolistsType[] = [
-    { id: todolistID1, title: 'What to learn', filter: 'all' },
-    { id: todolistID2, title: 'What to buy', filter: 'all' },
-];
+const initialState: TodolistsType[] = [];
 
 // Редюсер
-export const todolistReducer = (state: TodolistsType[] = initialState, action: ActionType): TodolistsType[] => {
+export const todolistsReducer = (state: TodolistsType[] = initialState, action: ActionType): TodolistsType[] => {
+    debugger
     switch (action.type) {
         case 'REMOVE_TODOLIST':
             return state.filter(tl => tl.id !== action.payload.id);

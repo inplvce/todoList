@@ -28,7 +28,7 @@ export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistsType = { id: string, title: string, filter: FilterValuesType }
 export type TaskStateType = { [key: string]: Array<TaskType> }
 
-function AppWithReducers() {
+function AppWithRedux() {
     const todolistID1 = v1();
     const todolistID2 = v1();
 
@@ -148,4 +148,4 @@ function AppWithReducers() {
     );
 }
 
-export default AppWithReducers;
+export default AppWithRedux;
