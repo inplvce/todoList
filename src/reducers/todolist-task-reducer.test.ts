@@ -1,6 +1,6 @@
 import {tasksReducer} from "./tasksReducer";
 import {addTodolistAC, removeTodolistAC, todolistsReducer} from "./todolistsReducer";
-import {TaskStateType, TodolistsType} from "../App";
+import {TaskStateType, TodolistsType} from "../AppWithRedux";
 import {PropsType} from "../Todolist";
 
 test('new array should be added when new todolist is added', () => {

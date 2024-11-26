@@ -1,7 +1,6 @@
-import React, {useContext, useReducer, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import {
     AppBar,
@@ -14,17 +13,15 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import {Menu, Swipe} from "@mui/icons-material";
+import {Menu} from "@mui/icons-material";
 import {pink} from "@mui/material/colors";
 import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC, removeTodolistAC,
-    todolistsReducer
 } from "./reducers/todolistsReducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./reducers/tasksReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState, store} from "./reducers/store";
+import {RootState} from "./reducers/store";
 
 export type FilterValuesType = "all" | "active" | "completed";
 export type TodolistsType = { id: string, title: string, filter: FilterValuesType }
@@ -36,25 +33,9 @@ function AppWithRedux() {
     const [darkMode, setDarkMode] = useState(false)
 
     const dispatch = useDispatch();
- const todolists = useSelector<RootState, Array<TodolistsType>>(state => state.todolists)
- const tasks = useSelector<RootState, TaskStateType>(state => state.tasks)
+    const todolists = useSelector<RootState, Array<TodolistsType>>(state => state.todolists)
 
-    // CRUD tasks
-    function removeTask(todolistID: string, taskID: string) {
-        dispatch(removeTaskAC(todolistID, taskID))
-    }
-
-    function addTask(todolistID: string, title: string) {
-        dispatch(addTaskAC(todolistID, title))
-    }
-
-    function changeTaskStatus(todolistID: string, taskId: string, isDone: boolean) {
-        dispatch(changeTaskStatusAC(todolistID, taskId, isDone))
-    }
-
-    function changeTaskTitle(todolistID: string, taskId: string, title: string) {
-        dispatch(changeTaskTitleAC(todolistID, taskId, title))
-    }
+    // CRUD tasks задиспатчили в тудулистах
 
     // CRUD todoLists
     function addTodoList(title: string) {
@@ -111,14 +92,9 @@ function AppWithRedux() {
                                         key={el.id}
                                         todolistID={el.id}
                                         title={el.title}
-                                        tasks={tasks[el.id] || []}
-                                        removeTask={removeTask}
                                         changeTodoListFilter={changeTodoListFilter}
-                                        addTask={addTask}
-                                        changeTaskStatus={changeTaskStatus}
                                         filter={el.filter}
                                         removeTodoList={removeTodoList}
-                                        changeTaskTitle={changeTaskTitle}
                                         changeTodoListTitle={changeTodoListTitle}
                                     />
                                 </Paper>
