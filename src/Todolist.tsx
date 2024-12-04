@@ -1,7 +1,7 @@
-import React, { ChangeEvent } from 'react';
-import { FilterValuesType } from './AppWithRedux';
-import { AddItemForm } from './AddItemForm';
-import { EditableSpan } from './EditableSpan';
+import React, {ChangeEvent} from 'react';
+import {FilterValuesType} from './AppWithRedux';
+import {AddItemForm} from './AddItemForm';
+import {EditableSpan} from './EditableSpan';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
@@ -19,7 +19,6 @@ export type TaskType = {
 export type PropsType = {
     todolistID: string
     title: string
-    // tasks: Array<TaskType>
     filter: FilterValuesType
 
     // removeTask: (todolistID: string, taskId: string) => void
@@ -29,10 +28,10 @@ export type PropsType = {
 
     changeTodoListFilter: (todolistID: string, filter: FilterValuesType) => void
     removeTodoList: (todolistID: string) => void
-    changeTodoListTitle:(todolistID: string, title: string) => void
+    changeTodoListTitle: (todolistID: string, title: string) => void
 }
 
-export function Todolist(
+export const Todolist = React.memo( (
     {
         todolistID,
         title,
@@ -40,9 +39,7 @@ export function Todolist(
         removeTodoList,
         changeTodoListFilter,
         changeTodoListTitle
-    }: PropsType)
-
-{
+    }: PropsType)=> {
 
     const tasks = useSelector<RootState, TaskType[]>((state): TaskType[] => state.tasks[todolistID])
 
@@ -57,17 +54,14 @@ export function Todolist(
     const changeTodoListTitleCallBack = (title: string) => changeTodoListTitle(todolistID, title)
 
     const tasksForTodolist = filter === "active"
-        ? tasks.filter(t => t.isDone === false)
+        ? tasks.filter(t => !t.isDone)
         : filter === "completed"
-            ? tasks.filter(t => t.isDone === true)
+            ? tasks.filter(t => t.isDone)
             : tasks
 
     const mappedTasks: Array<JSX.Element> = tasksForTodolist.map(t => {
-// const onChangeTaskStatus = (event: ChangeEvent<HTMLInputElement>) => {
-//     event.currentTarget.value
-// }
 
-        const onClickHandler = () =>  dispatch(removeTaskAC(todolistID, t.id))
+        const onClickHandler = () => dispatch(removeTaskAC(todolistID, t.id))
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
             let newIsDoneValue = e.currentTarget.checked
             dispatch(changeTaskStatusAC(todolistID, t.id, newIsDoneValue))
@@ -76,9 +70,9 @@ export function Todolist(
 
         return <li key={t.id} className={t.isDone ? "is-done" : ""}>
             <Checkbox defaultChecked
-                      // type="checkbox"
-                onChange={onChangeHandler}
-                checked={t.isDone} />
+                // type="checkbox"
+                      onChange={onChangeHandler}
+                      checked={t.isDone}/>
             <EditableSpan title={t.title} changeTitle={changeTaskTitleCallBack}/>
             <CloseIcon onClick={onClickHandler}>x</CloseIcon>
         </li>
@@ -87,25 +81,27 @@ export function Todolist(
     return (
         <div>
             <h3>
-                <EditableSpan title={title} changeTitle={changeTodoListTitleCallBack}  />
-                <Button style={{marginLeft: '8px'}}variant="outlined" onClick={removeTodolistHandler}>{<DeleteIcon fontSize={'small'} />}</Button>
-
+                <EditableSpan title={title} changeTitle={changeTodoListTitleCallBack}/>
+                <Button style={{marginLeft: '8px'}} variant="outlined" onClick={removeTodolistHandler}>{<DeleteIcon
+                    fontSize={'small'}/>}</Button>
             </h3>
-            <AddItemForm addItem={addTaskHandler} />
+
+            <AddItemForm addItem={addTaskHandler}/>
             <ul>
                 {mappedTasks}
             </ul>
             <div>
                 <Button variant={filter === 'all' ? "contained" : "text"}
                     // className={filter === 'all' ? "active-filter" : ""}
-                    onClick={onAllClickHandler}>All
+                        onClick={onAllClickHandler}>All
                 </Button>
                 <Button variant={filter === 'active' ? "contained" : "text"}
-                    onClick={onActiveClickHandler}>Active
+                        onClick={onActiveClickHandler}>Active
                 </Button>
                 <Button variant={filter === 'completed' ? "contained" : "text"}
-                    onClick={onCompletedClickHandler}>Completed
+                        onClick={onCompletedClickHandler}>Completed
                 </Button>
             </div>
         </div>)
 }
+)

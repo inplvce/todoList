@@ -101,9 +101,7 @@ function AppWithRedux() {
                             </Grid>
                         })}
                     </Grid>
-
                 </Container>
-
             </div>
         </ThemeProvider>
     );
