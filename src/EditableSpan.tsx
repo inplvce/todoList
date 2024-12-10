@@ -9,16 +9,16 @@ export const EditableSpan = React.memo(({title, changeTitle}: EditableSpanPropsT
     console.log('EditableSpan is called')
     const [isEditMode, setIsEditMode] = useState(false)
     const [newTitle, setNewTitle] = useState(title)
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
-    }
-    function onEditMode() {
+    }, [])
+    const onEditMode = React.useCallback( () => {
         setIsEditMode(true)
-    }
-    function offEditMode() {
+    }, [])
+    const offEditMode =  React.useCallback( () => {
         setIsEditMode(false)
         changeTitle(newTitle)
-    }
+    }, [])
 
 
     return (

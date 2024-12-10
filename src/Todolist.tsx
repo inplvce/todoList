@@ -20,26 +20,20 @@ export type PropsType = {
     todolistID: string
     title: string
     filter: FilterValuesType
-
-    // removeTask: (todolistID: string, taskId: string) => void
-    // addTask: (todolistID: string, taskTitle: string) => void
-    // changeTaskStatus: (todolistID: string, taskId: string, isDone: boolean) => void
-    // changeTaskTitle: (todolistID: string, taskId: string, title: string) => void
-
     changeTodoListFilter: (todolistID: string, filter: FilterValuesType) => void
     removeTodoList: (todolistID: string) => void
     changeTodoListTitle: (todolistID: string, title: string) => void
 }
 
-export const Todolist = React.memo( (
-    {
+export const Todolist = React.memo( function (props: PropsType) {
+    const {
         todolistID,
         title,
         filter,
         removeTodoList,
         changeTodoListFilter,
         changeTodoListTitle
-    }: PropsType)=> {
+    } = props;
 
     const tasks = useSelector<RootState, TaskType[]>((state): TaskType[] => state.tasks[todolistID])
 
@@ -47,11 +41,11 @@ export const Todolist = React.memo( (
 
     const addTask = useCallback((title: string) => dispatch(addTaskAC(todolistID, title)), [])
 
-    const onAllClickHandler = () => changeTodoListFilter(todolistID, "all");
-    const onActiveClickHandler = () => changeTodoListFilter(todolistID, "active");
-    const onCompletedClickHandler = () => changeTodoListFilter(todolistID, "completed");
-    const removeTodolistHandler = () => removeTodoList(todolistID)
-    const changeTodoListTitleCallBack = (title: string) => changeTodoListTitle(todolistID, title)
+    const onAllClickHandler = useCallback( () => changeTodoListFilter(todolistID, "all"), []);
+    const onActiveClickHandler = useCallback( () => changeTodoListFilter(todolistID, "active"), []);
+    const onCompletedClickHandler = useCallback( () => changeTodoListFilter(todolistID, "completed"), []);
+    const removeTodolistHandler = useCallback( () => removeTodoList(todolistID), []);
+    const changeTodoListTitleCallBack = useCallback( (title: string) => changeTodoListTitle(todolistID, title), []);
 
     const tasksForTodolist = filter === "active"
         ? tasks.filter(t => !t.isDone)
@@ -103,5 +97,5 @@ export const Todolist = React.memo( (
                 </Button>
             </div>
         </div>)
-}
-)
+})
+

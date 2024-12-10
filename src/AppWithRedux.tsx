@@ -43,18 +43,18 @@ function AppWithRedux() {
         dispatch(action)
     }, [])
 
-    function changeTodoListFilter(todolistID: string, filter: FilterValuesType) {
+    const changeTodoListFilter = useCallback(( todolistID: string, filter: FilterValuesType) =>  {
         dispatch(changeTodolistFilterAC(todolistID, filter))
-    }
+    }, [] )
 
-    function changeTodoListTitle(todolistID: string, title: string) {
+    const changeTodoListTitle = useCallback(( todolistID: string, title: string) =>  {
         dispatch(changeTodolistTitleAC(todolistID, title))
-    }
+    }, [] )
 
-    function removeTodoList(id: string) {
+    const removeTodoList = useCallback(( id: string) =>  {
         const action = removeTodolistAC(id)
         dispatch(action)
-    }
+    }, [] )
 
     const theme = createTheme({
         palette: {
