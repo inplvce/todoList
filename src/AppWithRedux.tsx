@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {AddItemForm} from './AddItemForm';
@@ -38,10 +38,10 @@ function AppWithRedux() {
     // CRUD tasks задиспатчили в тудулистах
 
     // CRUD todoLists
-    function addTodoList(title: string) {
+    const addTodoList = useCallback((title: string)=> {
         const action = addTodolistAC(title)
         dispatch(action)
-    }
+    }, [])
 
     function changeTodoListFilter(todolistID: string, filter: FilterValuesType) {
         dispatch(changeTodolistFilterAC(todolistID, filter))

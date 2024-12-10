@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from './AppWithRedux';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
@@ -45,7 +45,7 @@ export const Todolist = React.memo( (
 
     const dispatch = useDispatch();
 
-    const addTaskHandler = (title: string) => dispatch(addTaskAC(todolistID, title))
+    const addTask = useCallback((title: string) => dispatch(addTaskAC(todolistID, title)), [])
 
     const onAllClickHandler = () => changeTodoListFilter(todolistID, "all");
     const onActiveClickHandler = () => changeTodoListFilter(todolistID, "active");
@@ -86,7 +86,7 @@ export const Todolist = React.memo( (
                     fontSize={'small'}/>}</Button>
             </h3>
 
-            <AddItemForm addItem={addTaskHandler}/>
+            <AddItemForm addItem={addTask}/>
             <ul>
                 {mappedTasks}
             </ul>
