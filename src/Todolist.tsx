@@ -39,19 +39,28 @@ export const Todolist = React.memo( function (props: PropsType) {
 
     const dispatch = useDispatch();
 
-    const addTask = useCallback((title: string) => dispatch(addTaskAC(todolistID, title)), [])
+    const addTask = useCallback((title: string) => dispatch(addTaskAC(todolistID, title)), [todolistID])
+    const removeTodolistHandler = useCallback(() => removeTodoList(todolistID), [todolistID]);
+    const changeTodoListTitleCallBack = useCallback((title: string) => changeTodoListTitle(todolistID, title), [todolistID]);
 
-    const onAllClickHandler = useCallback( () => changeTodoListFilter(todolistID, "all"), []);
-    const onActiveClickHandler = useCallback( () => changeTodoListFilter(todolistID, "active"), []);
-    const onCompletedClickHandler = useCallback( () => changeTodoListFilter(todolistID, "completed"), []);
-    const removeTodolistHandler = useCallback( () => removeTodoList(todolistID), []);
-    const changeTodoListTitleCallBack = useCallback( (title: string) => changeTodoListTitle(todolistID, title), []);
 
-    const tasksForTodolist = filter === "active"
-        ? tasks.filter(t => !t.isDone)
-        : filter === "completed"
-            ? tasks.filter(t => t.isDone)
-            : tasks
+    const onAllClickHandler = useCallback(() => changeTodoListFilter(todolistID, "all"), [todolistID, filter]);
+    const onActiveClickHandler = useCallback(() => changeTodoListFilter(todolistID, "active"), [todolistID, filter]);
+    const onCompletedClickHandler = useCallback(() => changeTodoListFilter(todolistID, "completed"), [todolistID, filter]);
+
+    // const tasksForTodolist = filter === "active"
+    //     ? tasks.filter(t => !t.isDone)
+    //     : filter === "completed"
+    //         ? tasks.filter(t => t.isDone)
+    //         : tasks
+
+    let tasksForTodolist = tasks
+    if (filter === "active") {
+        tasksForTodolist = tasks.filter(t => !t.isDone)
+    }
+    if (filter === "completed") {
+        tasksForTodolist = tasks.filter(t => t.isDone)
+    }
 
     const mappedTasks: Array<JSX.Element> = tasksForTodolist.map(t => {
 
