@@ -7,8 +7,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import {useDispatch, useSelector} from "react-redux";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./reducers/tasksReducer";
+import {addTaskAC} from "./reducers/tasksReducer";
 import {RootState} from "./reducers/store";
+import {Task} from "./Task";
 
 export type TaskType = {
     id: string;
@@ -30,28 +31,6 @@ type TaskPropsType = {
     todolistID: string;
 };
 
-const Task = React.memo(({task, todolistID}: TaskPropsType) => {
-    const dispatch = useDispatch();
-
-    const onClickHandler = () => dispatch(removeTaskAC(todolistID, task.id));
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const newIsDoneValue = e.currentTarget.checked;
-        dispatch(changeTaskStatusAC(todolistID, task.id, newIsDoneValue));
-    };
-    const changeTaskTitleCallBack = (title: string) => dispatch(changeTaskTitleAC(todolistID, task.id, title));
-
-    return (
-        <li key={task.id} className={task.isDone ? "is-done" : ""}>
-            <Checkbox
-                onChange={onChangeHandler}
-                checked={task.isDone}
-            />
-            <EditableSpan title={task.title} changeTitle={changeTaskTitleCallBack} />
-            <CloseIcon onClick={onClickHandler}>x</CloseIcon>
-        </li>
-    );
-});
-
 export const Todolist = React.memo((props: PropsType) => {
     const {
         todolistID,
@@ -70,7 +49,7 @@ export const Todolist = React.memo((props: PropsType) => {
     const removeTodolistHandler = useCallback(() => removeTodoList(todolistID), [removeTodoList, todolistID]);
     const changeTodoListTitleCallBack = useCallback(
         (title: string) => changeTodoListTitle(todolistID, title),
-        [changeTodoListTitle, todolistID]
+        [todolistID]
     );
 
     const onAllClickHandler = useCallback(() => changeTodoListFilter(todolistID, "all"), [changeTodoListFilter, todolistID]);
@@ -97,7 +76,7 @@ export const Todolist = React.memo((props: PropsType) => {
             <AddItemForm addItem={addTask} />
             <ul>
                 {tasksForTodolist.map(t => (
-                    <Task key={t.id} task={t} todolistID={todolistID} />
+                    <Task key={t.id} task={t} todolistID={todolistID}  />
                 ))}
             </ul>
             <div>

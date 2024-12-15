@@ -20,14 +20,15 @@ export const tasksReducer = (state: TaskStateType = initialState, action: TaskRe
             }
             return copyState
         }
-        case "CHANGE_TASK_TITLE": {
+
+        case "CHANGE_TASK_TITLE":
             return {
                 ...state,
                 [action.todolistID]: state[action.todolistID].map(t =>
                     t.id === action.id ? { ...t, title: action.title } : t
-                )
+                ),
             };
-        }
+
         case "CHANGE_TASK_STATUS": {
             return {
                 ...state,

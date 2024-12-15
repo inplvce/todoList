@@ -18,7 +18,7 @@ export const EditableSpan = React.memo(({title, changeTitle}: EditableSpanPropsT
     const offEditMode =  React.useCallback( () => {
         setIsEditMode(false)
         changeTitle(newTitle)
-    }, [])
+    }, [newTitle, changeTitle])
 
 
     return (
