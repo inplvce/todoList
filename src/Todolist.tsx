@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {FilterValuesType} from './AppWithRedux';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {AddItemForm} from './common/components/AddItemForm';
+import {EditableSpan} from './common/components/EditableSpan';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';

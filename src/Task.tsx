@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback} from 'react';
 import {useDispatch} from "react-redux";
 import Checkbox from '@mui/material/Checkbox';
 import CloseIcon from '@mui/icons-material/Close';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from './common/components/EditableSpan';
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./reducers/tasksReducer";
 
 export type TaskType = {
